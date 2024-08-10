@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chatbot Comparator Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>AI Chatbot Comparator Dashboard</h1>
+    <form id="promptForm">
+        <label>
+            <input type="checkbox" id="mockToggle">
+            Use MockBot only
+        </label>
+        <br>
+        <label for="prompt">Enter your research question:</label>
+        <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea>
+        <br>
+        <button type="submit">Compare Answers</button>
+    </form>
+    <div id="results">
+        <div class="answer" id="openai">
+            <h2>OpenAI (ChatGPT)</h2>
+            <pre id="openai-answer"></pre>
+        </div>
+        <div class="answer" id="gemini">
+            <h2>Google Gemini</h2>
+            <pre id="gemini-answer"></pre>
+        </div>
+        <div class="answer" id="mock">
+            <h2>MockBot</h2>
+            <pre id="mock-answer"></pre>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>

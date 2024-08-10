@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AI Chatbot Comparator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>AI Chatbot Comparator Dashboard</h1>
+
+    <label>
+        <input type="checkbox" id="mockToggle" />
+        Use MockBot only (Toggle ON for MockBot, OFF for OpenAI + Gemini)
+    </label>
+
+    <form id="promptForm">
+        <textarea id="prompt" placeholder="Enter your research question here..." rows="4" cols="60"></textarea><br/>
+        <button type="submit">Compare Answers</button>
+    </form>
+
+    <div id="results">
+        <div class="answer" id="openai">
+            <h2>OpenAI (ChatGPT)</h2>
+            <pre id="openai-answer">No answer yet.</pre>
+        </div>
+        <div class="answer" id="gemini">
+            <h2>Google Gemini</h2>
+            <pre id="gemini-answer">No answer yet.</pre>
+        </div>
+        <div class="answer" id="mock">
+            <h2>MockBot</h2>
+            <pre id="mock-answer">No answer yet.</pre>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
