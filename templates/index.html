@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Chatbot Comparator Dashboard</title>
-    <link rel="stylesheet" href="static/style.css">
+  <meta charset="UTF-8" />
+  <title>AI Chat Comparator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <h1>AI Chatbot Comparator Dashboard</h1>
+  <div class="container">
+    <h1>AI Chat Comparator</h1>
+    <label>
+      <input type="checkbox" id="mockToggle" />
+      Use MockBot only
+    </label>
     <form id="promptForm">
-        <label>
-            <input type="checkbox" id="mockToggle">
-            Use MockBot only
-        </label>
-        <br>
-        <label for="prompt">Enter your research question:</label>
-        <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea>
-        <br>
-        <button type="submit">Compare Answers</button>
+      <textarea id="prompt" placeholder="Enter your question…"></textarea><br/>
+      <button type="submit">Compare</button>
     </form>
     <div id="results">
-        <div class="answer" id="openai">
-            <h2>OpenAI (ChatGPT)</h2>
-            <pre id="openai-answer"></pre>
-        </div>
-        <div class="answer" id="gemini">
-            <h2>Google Gemini</h2>
-            <pre id="gemini-answer"></pre>
-        </div>
-        <div class="answer" id="mock">
-            <h2>MockBot</h2>
-            <pre id="mock-answer"></pre>
-        </div>
+      <section>
+        <h2>OpenAI (via A4F)</h2>
+        <pre id="openai-answer">No answer yet.</pre>
+      </section>
+      <section>
+        <h2>Gemini (via A4F)</h2>
+        <pre id="gemini-answer">No answer yet.</pre>
+      </section>
+      <section>
+        <h2>MockBot</h2>
+        <pre id="mock-answer">No answer yet.</pre>
+      </section>
     </div>
-    <script src="static/script.js"></script>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

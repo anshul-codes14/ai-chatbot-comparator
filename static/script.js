@@ -1,45 +1,29 @@
 document.getElementById('promptForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  const prompt = document.getElementById('prompt').value.trim();
+  const useOpenAI = document.getElementById('mockToggle').checked ? false : true;
+  const useGemini = useOpenAI;
+  const useMock = document.getElementById('mockToggle').checked;
 
-    const prompt = document.getElementById('prompt').value.trim();
-    const useMock = document.getElementById('mockToggle').checked;
+  if (!prompt) return alert('Please enter a prompt.');
 
-    if (!prompt) {
-        alert("Please enter a prompt.");
-        return;
-    }
+  ['openai-answer','gemini-answer','mock-answer'].forEach(id => {
+    document.getElementById(id).textContent = 'Loading...';
+  });
 
-    // Show loading messages
-    document.getElementById('openai-answer').textContent = "Loading...";
-    document.getElementById('gemini-answer').textContent = "Loading...";
-    document.getElementById('mock-answer').textContent = "Loading...";
-
-    try {
-        const response = await fetch('/api/compare', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ prompt: prompt, use_mock: useMock })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            const errMsg = errorData.error || "Unknown error";
-            document.getElementById('openai-answer').textContent = "Error: " + errMsg;
-            document.getElementById('gemini-answer').textContent = "Error: " + errMsg;
-            document.getElementById('mock-answer').textContent = "Error: " + errMsg;
-            return;
-        }
-
-        const data = await response.json();
-
-        document.getElementById('openai-answer').textContent = data.openai || "No answer";
-        document.getElementById('gemini-answer').textContent = data.gemini || "No answer";
-        document.getElementById('mock-answer').textContent = data.mock || "No answer";
-
-    } catch (err) {
-        const msg = "Fetch error: " + err.message;
-        document.getElementById('openai-answer').textContent = msg;
-        document.getElementById('gemini-answer').textContent = msg;
-        document.getElementById('mock-answer').textContent = msg;
-    }
+  try {
+    const resp = await fetch('/api/compare', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ prompt, use_openai: useOpenAI, use_gemini: useGemini, use_mock: useMock })
+    });
+    const data = await resp.json();
+    document.getElementById('openai-answer').textContent = data.openai;
+    document.getElementById('gemini-answer').textContent = data.gemini;
+    document.getElementById('mock-answer').textContent = data.mock;
+  } catch (err) {
+    ['openai-answer','gemini-answer','mock-answer'].forEach(id => {
+      document.getElementById(id).textContent = `Error: ${err.message}`;
+    });
+  }
 });
