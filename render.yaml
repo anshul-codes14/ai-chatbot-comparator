@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ai-chat-compare
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python app.py
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
