@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AI Chat Comparator</title>
+  <h1><span style="color: #00bfa6;">AI Chatbot</span> Response Comparison Dashboard</h1>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
   <div class="container">
-    <h1>AI Chat Comparator</h1>
     <label>
       <input type="checkbox" id="mockToggle" />
       Use MockBot only
@@ -34,3 +34,58 @@
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chatbot Comparator</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Chatbot Comparator</h1>
+
+    <form id="chat-form">
+      <textarea id="prompt" placeholder="Ask your question..." required></textarea>
+      
+      <div class="toggles">
+        <div class="toggle-item">
+          <label for="use_openai">OpenAI</label>
+          <input type="checkbox" id="use_openai" checked>
+        </div>
+        <div class="toggle-item">
+          <label for="use_gemini">Gemini</label>
+          <input type="checkbox" id="use_gemini" checked>
+        </div>
+        <div class="toggle-item">
+          <label for="use_qwen">Qwen AI</label>
+          <input type="checkbox" id="use_qwen" checked>
+        </div>
+      </div>
+
+      <button type="submit">Compare Answers</button>
+    </form>
+
+    <div id="results">
+      <section>
+        <h2>OpenAI (via A4F)</h2>
+        <pre id="openai-answer">No answer yet.</pre>
+      </section>
+      <section>
+        <h2>Google Gemini (via A4F)</h2>
+        <pre id="gemini-answer">No answer yet.</pre>
+      </section>
+      <section>
+        <h2>Qwen AI (via A4F)</h2>
+        <pre id="qwen-answer">No answer yet.</pre>
+      </section>
+    </div>
+
+    <p class="footer-credit">Made by – Anshul Soni, Student at MITS</p>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
+

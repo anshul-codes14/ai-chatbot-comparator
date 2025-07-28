@@ -1,12 +1,14 @@
 import os
 import requests
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, render_template
+
 
 app = Flask(__name__)
 
 # Your A4F API key (set this in Render or .env)
-OPENAI_A4F_MODEL = "provider-6/gpt-4.1"   # Replace with actual OpenAI model ID
-GEMINI_A4F_MODEL = "provider-1/gemma-3-12b-it"  # Replace with actual Gemini model ID
+OPENAI_A4F_MODEL = "provider-6/gpt-4.1-mini"   # Replace with actual OpenAI model ID
+GEMINI_A4F_MODEL = "provider-6/gemini-2.5-flash-thinking"  # Replace with actual Gemini model ID
+QWEN_A4F_MODEL = "provider-3/qwen-2.5-72b"
 
 def ask_a4f(prompt, model_id):
     key = os.getenv("A4F_API_KEY", "").strip()
@@ -29,8 +31,6 @@ def ask_a4f(prompt, model_id):
     except Exception as e:
         return f"A4F error: {e}"
 
-def ask_mock(prompt):
-    return f"MockBot: Simulated answer for '{prompt}'"
 
 @app.route('/')
 def index():
@@ -42,7 +42,7 @@ def compare():
     prompt = data.get("prompt", "")
     use_openai = data.get("use_openai", False)
     use_gemini = data.get("use_gemini", False)
-    use_mock = data.get("use_mock", True)
+    use_qwen = data.get("use_qwen", False)
 
     results = {}
     if use_openai:
@@ -53,10 +53,10 @@ def compare():
         results["gemini"] = ask_a4f(prompt, GEMINI_A4F_MODEL)
     else:
         results["gemini"] = "Gemini disabled."
-    if use_mock:
-        results["mock"] = ask_mock(prompt)
+    if use_qwen:
+        results["qwen"] = ask_a4f(prompt, QWEN_A4F_MODEL)
     else:
-        results["mock"] = "MockBot disabled."
+        results["qwen"] = "Qwen AI disabled."
     return jsonify(results)
 
 if __name__ == '__main__':
