@@ -1,13 +1,15 @@
-import os
+eeimport os
 import requests
 from flask import Flask, request, jsonify, send_from_directory, render_template
+
+
 
 
 app = Flask(__name__)
 
 # Your A4F API key (set this in Render or .env)
-OPENAI_A4F_MODEL = "provider-6/gpt-4.1-mini"   # Replace with actual OpenAI model ID
-GEMINI_A4F_MODEL = "provider-6/gemini-2.5-flash-thinking"  # Replace with actual Gemini model ID
+OPENAI_A4F_MODEL = "provider-1/gpt-oss-20b"   # Replace with actual OpenAI model ID
+GEMINI_A4F_MODEL = "provider-1/gemma-3-4b-it"  # Replace with actual Gemini model ID
 QWEN_A4F_MODEL = "provider-3/qwen-2.5-72b"
 
 def ask_a4f(prompt, model_id):
@@ -21,8 +23,8 @@ def ask_a4f(prompt, model_id):
     payload = {
         "model": model_id,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7,
-        "max_tokens": 200
+        "temperature": 0.5,
+        "max_tokens": 100
     }
     resp = requests.post("https://api.a4f.co/v1/chat/completions", headers=headers, json=payload, timeout=20)
     try:
