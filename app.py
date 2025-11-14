@@ -8,9 +8,9 @@ from flask import Flask, request, jsonify, send_from_directory, render_template
 app = Flask(__name__)
 
 # Your A4F API key (set this in Render or .env)
-OPENAI_A4F_MODEL = "provider-1/llama-3.2-1b-instruct-fp-16"   # Replace with actual OpenAI model ID
-GEMINI_A4F_MODEL = "provider-5/grok-4-0709"  # Replace with actual Gemini model ID
-QWEN_A4F_MODEL = "provider-3/qwen-2.5-72b"
+OPENAI_A4F_MODEL = "provider-5/gpt-4o-mini"   # Replace with actual OpenAI model ID
+GEMINI_A4F_MODEL = "provider-3/llama-3.1-70b"  # Replace with actual Gemini model ID
+QWEN_A4F_MODEL = "provider-1/qwen3-32b"
 
 def ask_a4f(prompt, model_id):
     key = os.getenv("A4F_API_KEY", "").strip()
